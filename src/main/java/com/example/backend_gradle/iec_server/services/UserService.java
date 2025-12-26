@@ -28,6 +28,8 @@ public class UserService {
     private final JwtUtils jwtUtils;
 
     public ResponseEntity<?> registerUser(RegistrationRequest registrationRequest) {
+        var isRegistered = this.userRepo.findByEmail(registrationRequest.getEmail()).orElse(null);
+        ApiAssert.unAuthorizedIf(isRegistered != null, "Email is already registered");
         var passEncoder = securityConfig.passwordEncoder();
         var user = this.userMapper.toEntity(registrationRequest);
         user.setPassword(passEncoder.encode(user.getPassword()));
