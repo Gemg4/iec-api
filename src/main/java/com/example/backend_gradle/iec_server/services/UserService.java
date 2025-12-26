@@ -39,7 +39,7 @@ public class UserService {
         var user = this.getUserByEmail(loginRequest.getEmail());
         ApiAssert.unAuthorizedIf(!securityConfig.passwordEncoder().matches(loginRequest.getPassword(), user.getPassword()), "Invalid email or password");
         var token = this.jwtUtils.generateToken(this.userMapper.toDto(user));
-        return ResponseBuilder.success("Login successful",new ResponseToken(token, user.getRole()));
+        return ResponseBuilder.success("Login successful",new ResponseToken(token, user.getRole().toString()));
     }
 
     public User getUserByEmail(String email) {

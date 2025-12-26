@@ -1,6 +1,7 @@
 package com.example.backend_gradle.iec_server.services;
 
 import com.example.backend_gradle.iec_server.entities.Flyer;
+import com.example.backend_gradle.iec_server.entities.FlyerStatus;
 import com.example.backend_gradle.iec_server.entities.Record;
 import com.example.backend_gradle.iec_server.exceptions.ApiAssert;
 import com.example.backend_gradle.iec_server.repositories.RecordJpaRepository;
@@ -36,7 +37,10 @@ public class RecordService {
         } else {
             record.setFlyer(flyer);
         }
-        record.setStatus(status);
+        if (status.equals("pending")) record.setStatus(FlyerStatus.pending);
+        if (status.equals("approved")) record.setStatus(FlyerStatus.approved);
+        if (status.equals("declined")) record.setStatus(FlyerStatus.declined);
+        if (status.equals("deleted")) record.setStatus(FlyerStatus.deleted);
         this.recordRepo.save(record);
     }
 
