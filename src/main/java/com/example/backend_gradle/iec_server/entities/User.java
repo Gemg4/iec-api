@@ -1,5 +1,7 @@
 package com.example.backend_gradle.iec_server.entities;
 
+import com.example.backend_gradle.iec_server.entities.enums.UserRole;
+import com.example.backend_gradle.iec_server.entities.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,8 +30,8 @@ public class User {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", updatable = false)
-    private UserRoles role;
+    @Column(name = "role")
+    private UserRole role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -40,13 +42,7 @@ public class User {
 
     @PrePersist
     void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = UserStatus.offline;
-        }
-
-        if (this.role == null) {
-            this.role = UserRoles.faculty;
-        }
+        if (role == null) role = UserRole.faculty;
+        if (status == null) status = UserStatus.offline;
     }
 }

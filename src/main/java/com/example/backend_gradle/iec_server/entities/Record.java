@@ -1,5 +1,6 @@
 package com.example.backend_gradle.iec_server.entities;
 
+import com.example.backend_gradle.iec_server.entities.enums.FlyerStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,8 +41,6 @@ public class Record {
 
     @PrePersist
     void onCreate() {
-        if (this.status == null) {
-            this.status = FlyerStatus.pending;
-        }
+        if (this.status == null) this.status = FlyerStatus.pending;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.backend_gradle.iec_server.entities;
+package com.example.backend_gradle.iec_server.entities.enums;
 
 public enum FlyerStatus {
     approved,
