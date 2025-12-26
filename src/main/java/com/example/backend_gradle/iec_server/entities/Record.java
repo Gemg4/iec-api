@@ -23,8 +23,9 @@ public class Record {
     @Column(name = "flyer_id")
     private long flyer_id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", insertable = false)
-    private String status;
+    private FlyerStatus status;
 
     @Column(name = "email")
     private String email;
@@ -37,4 +38,10 @@ public class Record {
     @JsonIgnore
     private Flyer flyer;
 
+    @PrePersist
+    void onCreate() {
+        if (this.status == null) {
+            this.status = FlyerStatus.pending;
+        }
+    }
 }

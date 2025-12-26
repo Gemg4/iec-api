@@ -1,5 +1,7 @@
 package com.example.backend_gradle.iec_server.entities;
 
+import com.example.backend_gradle.iec_server.entities.Image;
+import com.example.backend_gradle.iec_server.entities.Record;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
